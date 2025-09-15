@@ -1,0 +1,18 @@
+stages:
+  - maven_clean
+  - maven_package
+
+clean:
+  tags: ["self-hosted"]
+  stage: maven_clean
+  image: maven:3.6.3-jdk-11
+  script:
+    - mvn clean
+
+package:
+  tags: ["self-hosted"]
+  stage: maven_package
+  image: maven:3.6.3-jdk-11
+  script:
+    - mvn package -DskipTests
+    - ls -l target/
